@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-healthcare.Api", "E-healthcare.Api.csproj", "{4F4337D9-98DB-430E-A006-3C75279E9C0D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-healthcare.Data", "..\E-healthcare.Data\E-healthcare.Data.csproj", "{8E7F4059-AC97-4664-B338-3E9CA98DE8A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-healthcare.Entities", "..\E-healthcare.Entities\E-healthcare.Entities.csproj", "{FDE6B795-8875-4A2E-A787-D59BB85950B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-healthcare.Shared", "..\E-healthcare.Shared\E-healthcare.Shared.csproj", "{3CB4CC9B-E827-4EFE-B69A-5E6D351B8BAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3037AEB3-5DDD-44D4-BCA3-CED998E71FBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-healthcare.Web", "..\E-healthcare.Web\E-healthcare.Web.csproj", "{EBC88027-79CC-4E0C-AE07-46AC0C206FB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F4337D9-98DB-430E-A006-3C75279E9C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F4337D9-98DB-430E-A006-3C75279E9C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F4337D9-98DB-430E-A006-3C75279E9C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F4337D9-98DB-430E-A006-3C75279E9C0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E7F4059-AC97-4664-B338-3E9CA98DE8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E7F4059-AC97-4664-B338-3E9CA98DE8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E7F4059-AC97-4664-B338-3E9CA98DE8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E7F4059-AC97-4664-B338-3E9CA98DE8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE6B795-8875-4A2E-A787-D59BB85950B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE6B795-8875-4A2E-A787-D59BB85950B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE6B795-8875-4A2E-A787-D59BB85950B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE6B795-8875-4A2E-A787-D59BB85950B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB4CC9B-E827-4EFE-B69A-5E6D351B8BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB4CC9B-E827-4EFE-B69A-5E6D351B8BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB4CC9B-E827-4EFE-B69A-5E6D351B8BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB4CC9B-E827-4EFE-B69A-5E6D351B8BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC88027-79CC-4E0C-AE07-46AC0C206FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC88027-79CC-4E0C-AE07-46AC0C206FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC88027-79CC-4E0C-AE07-46AC0C206FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC88027-79CC-4E0C-AE07-46AC0C206FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D36F3D5-E861-4445-B276-B7C4CE0682EF}
+	EndGlobalSection
+EndGlobal
