@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EHealthcare.Entities
 {
-    public class User : BaseEntity
+    public class Users : BaseEntity
     {
 
         [Required]

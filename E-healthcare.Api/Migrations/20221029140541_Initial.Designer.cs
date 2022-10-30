@@ -10,7 +10,7 @@ using ProjectManagement.Data;
 namespace E_healthcare.Api.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20221029123309_Initial")]
+    [Migration("20221029140541_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,7 +152,7 @@ namespace E_healthcare.Api.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("EHealthcare.Entities.User", b =>
+            modelBuilder.Entity("EHealthcare.Entities.Users", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -189,12 +189,12 @@ namespace E_healthcare.Api.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("EHealthcare.Entities.Cart", b =>
                 {
-                    b.HasOne("EHealthcare.Entities.User", "Owner")
+                    b.HasOne("EHealthcare.Entities.Users", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -218,7 +218,7 @@ namespace E_healthcare.Api.Migrations
 
             modelBuilder.Entity("EHealthcare.Entities.Order", b =>
                 {
-                    b.HasOne("EHealthcare.Entities.User", "User")
+                    b.HasOne("EHealthcare.Entities.Users", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)

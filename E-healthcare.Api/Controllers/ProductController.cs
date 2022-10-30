@@ -22,7 +22,10 @@ namespace ProjectManagement.Api.Controllers
         {
             try
             {
-                return Ok(await base.Post(product));
+                if (product is null)
+                    return BadRequest();
+                product.ID = new Random().Next(); 
+                return Ok(await Post(product));
             }
             catch(Exception ex)
             {
@@ -36,7 +39,7 @@ namespace ProjectManagement.Api.Controllers
         {
             try
             {
-                return Ok(await base.Post(product));
+                return Ok(await Post(product));
             }catch(Exception ex)
             {
                 return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
@@ -49,7 +52,7 @@ namespace ProjectManagement.Api.Controllers
         {
             try
             {
-                return Ok(base.Get());
+                return Ok(Get());
             }catch(Exception ex)
             {
                 return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
@@ -61,7 +64,7 @@ namespace ProjectManagement.Api.Controllers
         {
             try
             {
-                return Ok(base.Get(id));
+                return Ok(Get(id));
             }catch(Exception ex)
             {
                 return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
@@ -74,7 +77,7 @@ namespace ProjectManagement.Api.Controllers
         {
             try
             {
-                return await base.Delete(id);
+                return await Delete(id);
             }catch(Exception ex)
             {
                 return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using ProjectManagement.Data;
 using ProjectManagement.Shared;
 using System;
@@ -40,6 +41,12 @@ namespace E_healthcare.Api
                 );
             DependencyResolver.Init(this.RegisterDependencies(services).BuildServiceProvider());
             services.AddCors();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-healthcare API", Version = "1.0" });
+               
+            });
+
             var key = Encoding.ASCII.GetBytes("this is a secret for the demo purpose, please change in produ.");
             services.AddAuthentication(x =>
             {
@@ -81,15 +88,20 @@ namespace E_healthcare.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller}/{action=Index}/{id?}");
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(C => { C.SwaggerEndpoint("/swagger/v1/swagger.json", "E-Healthcare API"); });
         }
 
 
         private IServiceCollection RegisterDependencies(IServiceCollection services)
         {
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<IBaseRepository<User>, BaseRepository<User>>();
+            services.AddTransient<IBaseRepository<Users>, BaseRepository<Users>>();
             services.AddTransient<IBaseRepository<Product>, BaseRepository<Product>>();
             services.AddTransient<IBaseRepository<Cart>, BaseRepository<Cart>>();
             services.AddTransient<IBaseRepository<CartItem>, BaseRepository<CartItem>>();

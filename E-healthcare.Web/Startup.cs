@@ -1,3 +1,5 @@
+using E_healthcare.Web.Helpers;
+using E_healthcare.Web.HttpClients;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +7,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjectManagement.Shared;
+using System;
 
 namespace E_healthcare.Web
 {
@@ -21,7 +25,17 @@ namespace E_healthcare.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllersWithViews();
+            
+            services.AddControllers();
+           
+          
+            services.AddTransient<IAuthenticationHelper, AuthenticationHelper>();
+           
+
+
+            services.AddHttpClient();
+            services.AddCors();
+
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -66,6 +80,15 @@ namespace E_healthcare.Web
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+        }
+
+        private IServiceCollection RegisterDependencies(IServiceCollection services)
+        {
+           
+
+            
+
+            return services;
         }
     }
 }

@@ -12,14 +12,14 @@ namespace ProjectManagement.Data
 
         public void SeedInitialData()
         {
-            User testUser1 = new User
+            Users testUser1 = new Users
             {
                 FirstName = "Test",
                 LastName = "User1",
                 Password = "Password1",
                 Email = "testuser1@test.com",
             };
-            User adminUser = new User
+            Users adminUser = new Users
             {
                 FirstName = "Admin",
                 LastName = "",
@@ -28,8 +28,8 @@ namespace ProjectManagement.Data
                 IsAdmin = true
             };
 
-            User.Add(testUser1);
-            User.Add(adminUser);
+            Users.Add(testUser1);
+            Users.Add(adminUser);
 
             Product testProduct1 = new Product { Name = "Nutriosys Isabgol", CompanyName = "Company1", Price = 525, ImageUrl = "https://m.media-amazon.com/images/I/51inZITDWAL._AC_UL320_.jpg" };
             Product testProduct2 = new Product {  Name = "Herbocalm Capsules", CompanyName = "Company2", Price = 374, ImageUrl = "https://m.media-amazon.com/images/I/614040xGJKL._AC_UL320_.jpg" };
@@ -60,6 +60,6 @@ namespace ProjectManagement.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Order { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }

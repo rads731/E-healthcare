@@ -17,63 +17,73 @@ namespace Ehealthcare.Api.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly IBaseRepository<User> UserRepository;
-        public UserController(IBaseRepository<User> UserRepo)
+        private readonly IBaseRepository<Users> UserRepository;
+        public UserController(IBaseRepository<Users> UserRepo)
         {
             UserRepository = UserRepo;
         }
 
+       
 
         [AllowAnonymous]
         [HttpPost]
         [Route("signup")]
-        public async Task<string> Register(User user)
+        public async Task<ActionResult<string>> Register(Users user)
         {
             try
             {
                 if (this.ModelState.IsValid)
                 {
+                    if (user is null)
+                        return BadRequest();
+                    user.ID = new Random().Next();
                     UserRepository.Add(user);
                 }
                 else
                 {
-                    return "User not created";
+                    return BadRequest("User not created");
                 }
 
-                return "User created";
+                return Ok("User created");
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
             }
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> LoginUser(LoginDto login)
+        public async Task<ActionResult<AuthUserModel>> LoginUser(LoginDto login)
         {
-            if (this.ModelState.IsValid)
+            try
             {
-                AuthService authService = new AuthService(UserRepository);
-                AuthUserModel response = await authService.Authenticate(login).ConfigureAwait(true);
-                if (response != null)
+                if (this.ModelState.IsValid)
                 {
-                    return this.Ok(response);
+                    AuthService authService = new AuthService(UserRepository);
+                    AuthUserModel response = await authService.Authenticate(login).ConfigureAwait(true);
+                    if (response != null)
+                    {
+                        return Ok(response);
+                    }
+                    else
+                    {
+                        return BadRequest(new { error = "invalid_grant", error_description = "Invalid Credentials" });
+                    }
                 }
-                else
-                {
-                    return this.BadRequest(new { error = "invalid_grant", error_description = "Invalid Credentials" });
-                }
+            }catch(Exception ex)
+            {
+                throw;
             }
 
-            return this.BadRequest();
+            return BadRequest();
         }
 
         [AllowAnonymous]
         [HttpGet]
         [Route("findUser/{email}")]
-        public async Task<User> Find(string email)
+        public async Task<Users> Find(string email)
         {
            
             return UserRepository.Get().Where(u => u.Email == email).FirstOrDefault();
@@ -82,11 +92,11 @@ namespace Ehealthcare.Api.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("editUser")]
-        public ActionResult Update(User user)
+        public ActionResult Update(Users user)
         {
             try
             {
-                User result = UserRepository.Update(user).Result;
+                Users result = UserRepository.Update(user).Result;
                 if (result is null)
                 {
                     return BadRequest("User is not updated");

@@ -14,7 +14,7 @@ namespace EHealthcare.Entities
         [Required]
         public long OwnerID { get; set; }
 
-        public virtual User Owner { get; set; }
+        public virtual Users Owner { get; set; }
 
         public virtual ICollection<CartItem> Items { get; set; }
     }

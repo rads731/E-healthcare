@@ -18,6 +18,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Swagger.Net" Version="0.5.5" />
+    <PackageReference Include="Swashbuckle.Examples" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +27,17 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\scripts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\E-healthcare.Api\E-healthcare.Api.csproj" />
+	  <ProjectReference Include="..\E-healthcare.Entities\E-healthcare.Entities.csproj" />
+    
+   
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

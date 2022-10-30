@@ -16,13 +16,13 @@ namespace ProjectManagement.Api.Controllers
     public class BaseController<T> : ControllerBase where T : BaseEntity
     {
         protected readonly IBaseRepository<T> Repository;
-        private readonly IBaseRepository<User> UserRepository;
+        private readonly IBaseRepository<Users> UserRepository;
         private readonly IHttpContextAccessor HttpContextAccessor;
 
         public BaseController()
         {
             Repository = DependencyResolver.Current.GetService<IBaseRepository<T>>();
-            UserRepository = DependencyResolver.Current.GetService<IBaseRepository<User>>();
+            UserRepository = DependencyResolver.Current.GetService<IBaseRepository<Users>>();
             HttpContextAccessor = DependencyResolver.Current.GetService<IHttpContextAccessor>();
         }
 
@@ -92,7 +92,7 @@ namespace ProjectManagement.Api.Controllers
             return Ok();
         }
 
-        protected User SessionUser
+        protected Users SessionUser
         {
             get
             {

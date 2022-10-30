@@ -55,7 +55,7 @@ namespace E_healthcare.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     ID = table.Column<long>(nullable: false)
@@ -71,7 +71,7 @@ namespace E_healthcare.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.ID);
+                    table.PrimaryKey("PK_Users", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,9 +86,9 @@ namespace E_healthcare.Api.Migrations
                 {
                     table.PrimaryKey("PK_Cart", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Cart_User_OwnerID",
+                        name: "FK_Cart_Users_OwnerID",
                         column: x => x.OwnerID,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -107,9 +107,9 @@ namespace E_healthcare.Api.Migrations
                 {
                     table.PrimaryKey("PK_Order", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Order_User_UserID",
+                        name: "FK_Order_Users_UserID",
                         column: x => x.UserID,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -182,7 +182,7 @@ namespace E_healthcare.Api.Migrations
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

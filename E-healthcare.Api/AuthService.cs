@@ -14,15 +14,15 @@ namespace Ehealthcare.Api
 {
     public class AuthService
     {
-        private readonly IBaseRepository<User> UserRepository;
-        public AuthService(IBaseRepository<User> UserRepo)
+        private readonly IBaseRepository<Users> UserRepository;
+        public AuthService(IBaseRepository<Users> UserRepo)
         {
             UserRepository = UserRepo;
         }
 
         public async Task<AuthUserModel> Authenticate(LoginDto login)
         {
-            User result = null;
+            Users result = null;
             if (login.Type == "admin")
             {
 
@@ -39,7 +39,7 @@ namespace Ehealthcare.Api
             return await this.AddJWTToken(result).ConfigureAwait(true);
         }
 
-        public async Task<AuthUserModel> AddJWTToken(User user)
+        public async Task<AuthUserModel> AddJWTToken(Users user)
         {
             AuthUserModel model = new AuthUserModel();
             await Task.Run(() =>
