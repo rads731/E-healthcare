@@ -44,7 +44,7 @@ namespace Ehealthcare.Api.Controllers
                     return BadRequest("User not created");
                 }
 
-                return Ok("User created");
+                return Ok(user);
             }
             catch (Exception ex)
             {
