@@ -1,5 +1,6 @@
 ﻿using EHealthcare.Entities;
 using ProjectManagement.Shared;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,9 +17,16 @@ namespace ProjectManagement.Data
 
         public async Task<T> Add(T entity)
         {
-            Context.Add<T>(entity);
-            await Context.SaveChangesAsync();
+            try
+            {
+                Context.Add<T>(entity);
+                await Context.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                Console.Write(ex);
+            }
             return Get(entity.ID);
+
         }
 
         public async Task<int> Delete(long id)

@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Data;
+using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ProjectManagement.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/Cart")]
     public class CartController : BaseController<Cart>
@@ -34,32 +36,44 @@ namespace ProjectManagement.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> PlaceOrder(long userID)
         {
-            var userCart = Repository.Get().Where(i => i.OwnerID == userID).FirstOrDefault();
+            try
+            {
+                var userCart = Repository.Get().Where(i => i.OwnerID == userID).FirstOrDefault();
 
-            if (userCart is null)
+                if (userCart is null)
+                {
+                    userCart = await Repository.Add(new Cart { OwnerID = userID });
+                }
+                foreach (var item in userCart.Items)
+                {
+                    CartItemRepository.Add(item);
+                }
+                return Ok();
+            }catch (Exception ex)
             {
-                userCart = await Repository.Add(new Cart { OwnerID = userID });
+                return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
             }
-            foreach (var item in userCart.Items)
-            {
-                CartItemRepository.Delete(item.ID);
-            }
-            return Ok();
         }
 
-        [Route("Add/{productID}")]
+        [Route("AddInfo")]
         [HttpPost]
         public async Task<IActionResult> Post(long productID, long userID)
         {
-            var userCart = Repository.Get().Where(i => i.OwnerID == userID).FirstOrDefault();
-
-            if (userCart is null)
+            try
             {
-                userCart = await Repository.Add(new Cart { OwnerID = userID });
+                var userCart = Repository.Get().Where(i => i.OwnerID == userID).FirstOrDefault();
+
+                if (userCart is null)
+                {
+                    userCart = await Repository.Add(new Cart { OwnerID = userID });
+                }
+                var cartItem = new CartItem { CartID = userCart.ID, ProductID = productID };
+                var result = CartItemRepository.Add(cartItem);
+                return Ok();
+            }catch(Exception ex)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
             }
-            var cartItem = new CartItem { CartID = userCart.ID, ProductID = productID };
-            var result = CartItemRepository.Add(cartItem);
-            return Ok();
         }
 
         public async override Task<IActionResult> Delete(long id)

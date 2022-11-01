@@ -24,7 +24,7 @@ namespace ProjectManagement.Api.Controllers
             {
                 if (product is null)
                     return BadRequest();
-                product.ID = new Random().Next(); 
+                //product.ID = new Random().Next(); 
                 return Ok(await Post(product));
             }
             catch(Exception ex)

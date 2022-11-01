@@ -28,7 +28,7 @@ namespace Ehealthcare.Api.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("signup")]
-        public async Task<ActionResult<string>> Register(Users user)
+        public async Task<ActionResult<Users>> Register(Users user)
         {
             try
             {
@@ -36,12 +36,12 @@ namespace Ehealthcare.Api.Controllers
                 {
                     if (user is null)
                         return BadRequest();
-                    user.ID = new Random().Next();
+                   // user.ID = new Random().Next();
                     UserRepository.Add(user);
                 }
                 else
                 {
-                    return BadRequest("User not created");
+                    return BadRequest(user);
                 }
 
                 return Ok(user);
