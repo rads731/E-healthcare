@@ -1,4 +1,5 @@
 ﻿using EHealthcare.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Data;
 using System;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManagement.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/admin")]
     public class ProductController : BaseController<Product>

@@ -6,6 +6,7 @@ using ProjectManagement.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace EHealthcare.Api.Controllers
@@ -21,18 +22,31 @@ namespace EHealthcare.Api.Controllers
         }
 
         [HttpGet("accountInfo/{email}")]
-        public Account getAccountDetails(String email)
+        public ActionResult<Account> getAccountDetails(String email)
         {
-            return AccountRepo.Get().Where(a => a.Email == email).FirstOrDefault();
+            try
+            {
+                Account result = AccountRepo.Get().Where(a => a.Email == email).FirstOrDefault());
+                return Ok(result);
+            }catch(Exception ex)
+            {
+               return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message);
+            }
         }
 
         [HttpPut("addFunds")]
-        public String AddFunds([FromBody] Account account)
+        public ActionResult<String> AddFunds([FromBody] Account account)
         {
-            var result = AccountRepo.Get().Where(a => a.Email == account.Email).First();
-            account.Amount = result.Amount + account.Amount;
-            var updated = AccountRepo.Update(account).Result;
-            return "Account updated";
+            try
+            {
+                var result = AccountRepo.Get().Where(a => a.Email == account.Email).First();
+                account.Amount = result.Amount + account.Amount;
+                var updated = AccountRepo.Update(account).Result;
+                return Ok("Account updated");
+            }catch (Exception ex)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError.GetHashCode(), ex.Message); 
+            }
         }
     }
 }

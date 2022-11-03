@@ -8,8 +8,8 @@ using System.Net;
 using System.Threading.Tasks;
 
 namespace ProjectManagement.Api.Controllers
-{
-    //[Authorize]
+{ 
+    [Authorize]
     [ApiController]
     [Route("api/Cart")]
     public class CartController : BaseController<Cart>
