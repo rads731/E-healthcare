@@ -94,7 +94,7 @@ namespace E_healthcare.Api.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("EHealthcare.Entities.Order", b =>
+            modelBuilder.Entity("EHealthcare.Entities.Orders", b =>
                 {
                     b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
@@ -114,7 +114,7 @@ namespace E_healthcare.Api.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("EHealthcare.Entities.Product", b =>
@@ -214,7 +214,7 @@ namespace E_healthcare.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EHealthcare.Entities.Order", b =>
+            modelBuilder.Entity("EHealthcare.Entities.Orders", b =>
                 {
                     b.HasOne("EHealthcare.Entities.Users", "User")
                         .WithMany()

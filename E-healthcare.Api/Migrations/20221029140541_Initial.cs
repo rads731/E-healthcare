@@ -94,7 +94,7 @@ namespace E_healthcare.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     ID = table.Column<long>(nullable: false)
@@ -157,7 +157,7 @@ namespace E_healthcare.Api.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_UserID",
-                table: "Order",
+                table: "Orders",
                 column: "UserID");
         }
 
@@ -173,7 +173,7 @@ namespace E_healthcare.Api.Migrations
                 name: "Category");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Cart");

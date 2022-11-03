@@ -63,9 +63,10 @@ namespace ProjectManagement.Api.Controllers
             {
                 var userCart = Repository.Get().Where(i => i.OwnerID == userID).FirstOrDefault();
 
-                if (userCart is null)
+                if (userCart == null)
                 {
                     userCart = await Repository.Add(new Cart { OwnerID = userID });
+
                 }
                 var cartItem = new CartItem { CartID = userCart.ID, ProductID = productID };
                 var result = CartItemRepository.Add(cartItem);
